@@ -60,7 +60,7 @@ def makecount(digit,nums):
     expr = str(bin(digit))[2:]
     lenth= len(expr)
     for i in range(nums-lenth):
-        expr += '0' 
+        expr = '0' + expr
     
     return expr
 
@@ -117,7 +117,7 @@ def evaly(expr, dicty):
 
 def rpe(expr):
     """sprowadza wyrazenie logiczne expr do onp"""
-    prioritets = {'&' : 2, '|' : 1, '=' : 0, '/': 1, '-': 0 }
+    prioritets = {'~' : 4,'&' : 3, '|' : 2, '=' : 1, '/': 2, '-': 1 }
     string = ""
     stack = []
     for i in expr:
@@ -203,7 +203,7 @@ def writingout(combinations, tabl):
     for i, j in zip(combinations, tabl):
         if j == 1:
             newdict[i]=combinations[i] 
-    string = "  "
+    string = ""
     num = 0
     for i in newdict:
         s = newdict[i]
@@ -282,13 +282,22 @@ def main(expr):
         answer =  evaly(onp, chary)
         if answer == 1:
             start_dict[index]=dict(chary)
-            index += 1
-            
+            index += 1        
     start_dict_copy = dict(start_dict)
 	
-    for i in range(len(chary)-1):
-            finish_dict = slip(start_dict_copy)            
-            start_dict_copy = finish_dict  
+    print(start_dict)
+    if len(start_dict)==num_of_combi:
+        result = True
+        print(result)
+        return result
+        
+    if len(start_dict)==0:
+        result = False
+        print(result)
+        return result
+    for i in range(len(chary)):
+        finish_dict = slip(start_dict_copy)            
+        start_dict_copy = finish_dict  
     result = quine(start_dict, finish_dict)
     print(result)
     
