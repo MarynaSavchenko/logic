@@ -285,7 +285,6 @@ def main(expr):
             index += 1        
     start_dict_copy = dict(start_dict)
 	
-    print(start_dict)
     if len(start_dict)==num_of_combi:
         result = True
         print(result)
